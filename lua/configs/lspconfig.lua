@@ -1,22 +1,22 @@
 require("nvchad.configs.lspconfig").defaults()
 
--- lspconfig.clangd.setup {
---   on_attach = on_attach,
---   on_init = on_init,
---   capabilities = capabilities,
---   cmd = {
---     "clangd",
---     "--query-driver=/usr/bin/g++", -- আপনার পাওয়া পাথটি এখানে দিন
---     "--background-index",
---     "--clang-tidy",
---   },
--- }
---
+local lspconfig = require('lspconfig') 
+-- HTML
+lspconfig.html.setup {}
 
-local servers = { "html", "cssls" }
-vim.lsp.enable(servers)
--- vim.lsp.enable('clangd')
+-- CSS
+lspconfig.cssls.setup {}
 
+-- Python (pyright)
+lspconfig.pyright.setup {
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic", -- "strict" চাইলে করো
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
+}
 
-
--- read :h vim.lsp.config for changing options of lsp servers 
