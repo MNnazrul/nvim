@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>rt", function()
   vim.notify("rust-analyzer ON")
 end, { desc = "Toggle rust-analyzer" })
 
-vim.keymap.set("n", "<leader>u", "gUiwEa", {
+vim.keymap.set("n", "<leader>u", "gUiwE", {
   desc = "Uppercase word and append at word end"
 })
 
