@@ -4,6 +4,7 @@ return {
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
+  { "oonamo/ef-themes.nvim" },
 
   -- These are some examples, uncomment them if you want to see them work!
   {
