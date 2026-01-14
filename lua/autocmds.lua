@@ -10,9 +10,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "cpp" },
   callback = function()
-    vim.opt_local.tabstop = 2        -- tab দেখাবে 4 space
-    vim.opt_local.shiftwidth = 2     -- indent = 4
-    vim.opt_local.softtabstop = 2    -- tab/backspace = 4
+    vim.opt_local.tabstop = 4        -- tab দেখাবে 4 space
+    vim.opt_local.shiftwidth = 4     -- indent = 4
+    vim.opt_local.softtabstop = 4    -- tab/backspace = 4
     vim.opt_local.expandtab = true   -- tab মানে space
   end,
 })
