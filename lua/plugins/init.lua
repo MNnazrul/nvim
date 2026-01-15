@@ -60,6 +60,27 @@ return {
       })
     end,
   },
+  {
+  "lukas-reineke/indent-blankline.nvim",
+  opts = {
+    indent = { char = "│" },
+    scope = { enabled = true },
+  },
+  config = function(_, opts)
+    local hooks = require("ibl.hooks")
+
+    hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+      vim.api.nvim_set_hl(0, "IblIndent", { link = "Comment" })
+      vim.api.nvim_set_hl(0, "IblScope",  { link = "Statement" })
+    end)
+
+    opts.indent.highlight = "IblIndent"
+    opts.scope.highlight  = "IblScope"
+
+    require("ibl").setup(opts)
+  end,
+}
+
 
    --  {
   --   "karb94/neoscroll.nvim",
