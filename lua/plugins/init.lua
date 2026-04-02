@@ -79,8 +79,37 @@ return {
 
     require("ibl").setup(opts)
   end,
-}
+},
 
+  {
+    "blazkowolf/gruber-darker.nvim",
+    lazy = false,      -- start-up এ load হবে
+    priority = 1000,   -- colorscheme আগে load করার জন্য
+    config = function()
+      vim.cmd.colorscheme("gruber-darker")
+    end,
+  },
+
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+        { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+  }
 
    --  {
   --   "karb94/neoscroll.nvim",

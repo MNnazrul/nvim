@@ -20,12 +20,11 @@ local servers = {
     },
   },
 
-  clangd = {
-    cmd = {
-      "clangd",
-      "--offset-encoding=utf-16",
-    },
-  },
+  -- clangd = {
+  --   cmd = {
+  --     "/usr/bin/clangd"
+  --   },
+  -- },
 }
 
 for name, opts in pairs(servers) do
