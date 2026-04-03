@@ -109,6 +109,14 @@ return {
     keys = {
         { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     }
+  },
+
+  {
+    dir = "~/Desktop/projects/source-controller",
+    cmd = { "SourceControl", "SourceControlOpen", "SourceControlClose" },
+    keys = {
+      { "<leader>sc", "<cmd>SourceControl<cr>", desc = "Source Control" },
+    },
   }
 
    --  {
