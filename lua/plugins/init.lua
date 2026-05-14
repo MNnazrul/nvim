@@ -1,10 +1,15 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre",
     opts = require "configs.conform",
   },
   { "oonamo/ef-themes.nvim" },
+
+  {
+    "github/copilot.vim",
+    event = "InsertEnter",
+  },
 
   -- These are some examples, uncomment them if you want to see them work!
   {
@@ -22,7 +27,7 @@ return {
     'rust-lang/rust.vim',
     ft = "rust",
     init = function()
-      vim.g.rustfmt_autosave = 1
+      vim.g.rustfmt_autosave = 0
     end
   },
   {
@@ -37,19 +42,20 @@ return {
   },
   {
     'saecki/crates.nvim',
-    ft = {"toml"},
+    ft = { "toml" },
     config = function()
-      require("crates").setup {
+      require("crates").setup({
         completion = {
-          cmp = {
-            enabled = true
-          },
+          crates = { enabled = true },
         },
-      }
-      require('cmp').setup.buffer({
-        sources = { { name = "crates" }}
+        lsp = {
+          enabled = true,
+          actions = true,
+          completion = true,
+          hover = true,
+        },
       })
-    end
+    end,
   },
   {
     "sphamba/smear-cursor.nvim",
