@@ -1,10 +1,15 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre",
     opts = require "configs.conform",
   },
   { "oonamo/ef-themes.nvim" },
+
+  {
+    "github/copilot.vim",
+    event = "InsertEnter",
+  },
 
   -- These are some examples, uncomment them if you want to see them work!
   {
@@ -22,7 +27,7 @@ return {
     'rust-lang/rust.vim',
     ft = "rust",
     init = function()
-      vim.g.rustfmt_autosave = 1
+      vim.g.rustfmt_autosave = 0
     end
   },
   {
@@ -37,19 +42,20 @@ return {
   },
   {
     'saecki/crates.nvim',
-    ft = {"toml"},
+    ft = { "toml" },
     config = function()
-      require("crates").setup {
+      require("crates").setup({
         completion = {
-          cmp = {
-            enabled = true
-          },
+          crates = { enabled = true },
         },
-      }
-      require('cmp').setup.buffer({
-        sources = { { name = "crates" }}
+        lsp = {
+          enabled = true,
+          actions = true,
+          completion = true,
+          hover = true,
+        },
       })
-    end
+    end,
   },
   {
     "sphamba/smear-cursor.nvim",
@@ -60,6 +66,64 @@ return {
       })
     end,
   },
+  {
+  "lukas-reineke/indent-blankline.nvim",
+  opts = {
+    indent = { char = "│" },
+    scope = { enabled = true },
+  },
+  config = function(_, opts)
+    local hooks = require("ibl.hooks")
+
+    hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+      vim.api.nvim_set_hl(0, "IblIndent", { link = "Comment" })
+      vim.api.nvim_set_hl(0, "IblScope",  { link = "Statement" })
+    end)
+
+    opts.indent.highlight = "IblIndent"
+    opts.scope.highlight  = "IblScope"
+
+    require("ibl").setup(opts)
+  end,
+},
+
+  {
+    "blazkowolf/gruber-darker.nvim",
+    lazy = false,      -- start-up এ load হবে
+    priority = 1000,   -- colorscheme আগে load করার জন্য
+    config = function()
+      vim.cmd.colorscheme("gruber-darker")
+    end,
+  },
+
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+        { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+  },
+
+  {
+    dir = "~/Desktop/projects/source-controller",
+    cmd = { "SourceControl", "SourceControlOpen", "SourceControlClose" },
+    keys = {
+      { "<leader>sc", "<cmd>SourceControl<cr>", desc = "Source Control" },
+    },
+  }
 
    --  {
   --   "karb94/neoscroll.nvim",

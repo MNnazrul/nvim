@@ -20,11 +20,42 @@ local servers = {
     },
   },
 
+  gopls = {
+    settings = {
+      gopls = {
+        gofumpt = true,
+        completeUnimported = true,
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+          shadow = true,
+          nilness = true,
+          unusedwrite = true,
+          useany = true,
+        },
+        staticcheck = true,
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
+      },
+    },
+  },
+
   clangd = {
     cmd = {
       "clangd",
-      "--offset-encoding=utf-16",
+      "--background-index",
+      "--clang-tidy",
+      "--header-insertion=iwyu",
+      "--fallback-style={BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Never}",
     },
+    filetypes = { "c", "h", "cpp", "hpp", "objc", "objcpp" },
   },
 }
 
